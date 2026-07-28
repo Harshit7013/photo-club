@@ -1,0 +1,122 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Bebas Neue", "Impact", sans-serif;
+  --font-editorial: "Fraunces", "Cormorant Garamond", serif;
+  --font-sans: "Inter", "Helvetica Neue", sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+  --color-charcoal: var(--charcoal);
+  --color-orange: var(--orange);
+  --color-orange-burnt: var(--orange-burnt);
+  --color-orange-soft: var(--orange-soft);
+  --color-gold: var(--gold);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--orange);
+  --color-primary-foreground: var(--ink);
+  --color-secondary: var(--charcoal);
+  --color-secondary-foreground: var(--cream);
+  --color-accent: var(--orange-burnt);
+  --color-accent-foreground: var(--cream);
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: var(--orange);
+  --color-destructive: oklch(0.577 0.245 27.325);
+  --color-destructive-foreground: oklch(0.98 0 0);
+  --color-popover: var(--charcoal);
+  --color-popover-foreground: var(--cream);
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-2xl: 36px;
+}
+
+:root {
+  --background: oklch(0.14 0.005 40);
+  --foreground: oklch(0.97 0.01 70);
+  --ink: oklch(0.11 0.005 40);
+  --charcoal: oklch(0.19 0.008 40);
+  --cream: oklch(0.965 0.015 65);
+  --orange: oklch(0.72 0.19 45);
+  --orange-burnt: oklch(0.58 0.19 38);
+  --orange-soft: oklch(0.88 0.06 55);
+  --gold: oklch(0.82 0.13 80);
+  --line: oklch(1 0 0 / 12%);
+  --muted: oklch(0.22 0.008 40);
+  --muted-foreground: oklch(0.72 0.02 60);
+  --card: oklch(0.18 0.008 40);
+  --card-foreground: oklch(0.97 0.01 70);
+  --radius: 1rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+    background: var(--background);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--orange);
+    color: var(--ink);
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+}
+@utility font-editorial {
+  font-family: var(--font-editorial);
+}
+
+@utility marquee-track {
+  animation: marquee 40s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 900ms cubic-bezier(.2,.7,.2,1), transform 900ms cubic-bezier(.2,.7,.2,1);
+}
+@utility reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.5;
+  }
+}
